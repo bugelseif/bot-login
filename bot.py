@@ -26,6 +26,13 @@ def main():
     bot.browser = Browser.FIREFOX
     bot.driver_path = GeckoDriverManager().install()
 
+    maestro.alert(
+        task_id=execution.task_id,
+        title="Começando processo",
+        message="This is an info alert",
+        alert_type=AlertType.INFO
+    )
+
     # Abre website.
     bot.browse("https://practicetestautomation.com/practice-test-login/")
     
@@ -89,6 +96,14 @@ def main():
 
         # Imprime mensagem de finalização
         print("Finally")
+        maestro.finish_task(
+            task_id=execution.task_id,
+            status=AutomationTaskFinishStatus.SUCCESS,
+            message="Tarefa foi concluída com sucesso.",
+            total_items=1, # Número total de itens processados
+            processed_items=1, # Número de itens processados com sucesso
+            failed_items=0 # Número de itens processados com falha
+        )
 
 
 
