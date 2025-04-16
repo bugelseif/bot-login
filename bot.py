@@ -33,14 +33,6 @@ def main():
         alert_type=AlertType.INFO
     )
 
-    maestro.new_log_entry(
-        activity_label="controle_de_login",
-        values={
-            "data": "Insert Value",
-            "user": "Insert Value"
-        }
-    )
-
     # Abre website.
     bot.browse("https://practicetestautomation.com/practice-test-login/")
     
@@ -50,7 +42,7 @@ def main():
         by=By.ID
         )
     # Ação de digitar no elemento, valor vindo de credenciais
-    elemento_campo_usuario.send_keys(maestro.get_credential(label="demo", key="user"))
+    elemento_campo_usuario.send_keys("student")
 
     # Busca pelo elemento input de senha
     elemento_campo_senha = bot.find_element(
@@ -58,7 +50,7 @@ def main():
         by=By.ID
         )
     # Ação de digitar no elemento, valor vindo de credenciais
-    elemento_campo_senha.send_keys(maestro.get_credential(label="demo", key="chave"))
+    elemento_campo_senha.send_keys("Password123")
 
     # Busca pelo elemento botão submit
     elemento_botao = bot.find_element(
@@ -87,17 +79,6 @@ def main():
         # Ação de clicar no elemento
         elemento_deslogado.click()
 
-        bot.save_screenshot("sucesso.png")
-
-        maestro.post_artifact(
-            task_id=execution.task_id,
-            artifact_name="sucesso.png",
-            filepath="sucesso.png"
-        )
-
-        status=AutomationTaskFinishStatus.SUCCESS
-        message="Tarefa foi concluída com sucesso."
-
 
     except Exception as ex:
         # Busca pelo elemento de mensagem de erro
@@ -109,19 +90,6 @@ def main():
         # Imprime a mensagem de erro
         print(error_alert.text)
 
-        bot.save_screenshot("erro.png")
-
-        maestro.error(
-            task_id=execution.task_id, 
-            exception=ex,
-            tags={"exemplo": "valor de exemplo"},
-            screenshot="erro.png"
-            )
-        
-        status=AutomationTaskFinishStatus.FAILED
-        message="Tarefa falhou."
-
-
     finally:
         # Finaliza fechando o navegador
         bot.stop_browser()
@@ -130,8 +98,8 @@ def main():
         print("Finally")
         maestro.finish_task(
             task_id=execution.task_id,
-            status=status,
-            message=message,
+            status=AutomationTaskFinishStatus.SUCCESS,
+            message="Tarefa foi concluída com sucesso.",
             total_items=1, # Número total de itens processados
             processed_items=1, # Número de itens processados com sucesso
             failed_items=0 # Número de itens processados com falha
