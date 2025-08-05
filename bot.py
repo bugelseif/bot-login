@@ -3,7 +3,7 @@ from botcity.web import WebBot, Browser, By
 from webdriver_manager.firefox import GeckoDriverManager
 
 # Import de integração com BotCity Maestro SDK
-from botcity.maestro import *
+from botcity.maestro import BotMaestroSDK, AutomationTaskFinishStatus, AlertType
 
 # Desabilita erros enquanto não tem conexão com Orquestrador (para execução local)
 BotMaestroSDK.RAISE_NOT_CONNECTED = False
@@ -80,7 +80,7 @@ def main():
         elemento_deslogado.click()
 
 
-    except Exception as ex:
+    except Exception:
         # Busca pelo elemento de mensagem de erro
         error_alert = bot.find_element(
             selector="error",
