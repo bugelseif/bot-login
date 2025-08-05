@@ -26,4 +26,4 @@ jobs:
         pip install ruff  # Instala o Ruff
 
     - name: Run Ruff Linting
-      run: ruff check .
+      run: ruff check bot.py

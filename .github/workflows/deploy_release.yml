@@ -2,7 +2,7 @@ name: Deploy e Release
 
 on:
   workflow_run:
-    workflows: ["ruff"]
+    workflows: ["Lint with Ruff"]
     types:
       - completed
 
