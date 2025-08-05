@@ -11,7 +11,7 @@ BotMaestroSDK.RAISE_NOT_CONNECTED = False
 
 def main():
     # Instancia do SDK + autenticação
-     maestro = BotMaestroSDK.from_sys_args()
+    maestro = BotMaestroSDK.from_sys_args()
     ## Obtém detalhes de uma tarefa
     execution = maestro.get_execution()
 
