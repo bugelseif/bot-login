@@ -1,14 +1,14 @@
 name: Deploy e Release
 
 on:
-  push:
-    branches:
-      - main
+  workflow_run:
+    workflows: ["ruff"]
+    types:
+      - completed
 
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
-    needs: ruff # Adiciona dependência do fluxo ruff.yml
 
     steps:
       - name: Checkout code
