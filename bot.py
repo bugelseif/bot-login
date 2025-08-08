@@ -94,6 +94,8 @@ def main():
         # Finaliza fechando o navegador
         bot.stop_browser()
 
+        print("final")
+
         # Imprime mensagem de finalização
         print("Finally")
         maestro.finish_task(
