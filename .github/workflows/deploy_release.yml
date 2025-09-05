@@ -1,15 +1,9 @@
 name: Deploy e Release
 
-# on:
-#   workflow_run:
-#     workflows: ["Lint with Ruff"]
-#     types:
-#       - completed
-
 on:
   push:
-    tags:
-      - '*'
+    branches:
+      - main
 
 
 jobs:
@@ -30,16 +24,13 @@ jobs:
           git clone --branch v1.0 https://github.com/botcity-dev/cicd-pipeline-utils.git
           chmod +x cicd-pipeline-utils/scripts/bot.sh
 
-      - name: Definir versão da tag
-        run: echo "TAG_VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
-
       - name: Deploy Bot
         env:
           SERVER: ${{ secrets.SERVER }}
           LOGIN: ${{ secrets.LOGIN }}
           KEY: ${{ secrets.KEY }}
         run: |
-          cicd-pipeline-utils/scripts/bot.sh deploy -version "${{ env.TAG_VERSION }}" -botFile "./bot-login.zip" -botId "bot-demo-cicd" -type "python" -repository "live"
+          cicd-pipeline-utils/scripts/bot.sh deploy -version "1.1.3" -botFile "./bot-login.zip" -botId "bot-demo-cicd" -type "python" -repository "live"
 
       - name: Release Bot
         env:
@@ -47,4 +38,4 @@ jobs:
           LOGIN: ${{ secrets.LOGIN }}
           KEY: ${{ secrets.KEY }}
         run: |
-          cicd-pipeline-utils/scripts/bot.sh release -version "${{ env.TAG_VERSION }}" -botId "bot-demo-cicd"
+          cicd-pipeline-utils/scripts/bot.sh release -version "1.1.3" -botId "bot-demo-cicd"
