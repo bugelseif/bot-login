@@ -21,7 +21,7 @@ jobs:
 
       - name: Checkout bot.sh from repository
         run: |
-          git clone --branch v1.0 https://github.com/botcity-dev/cicd-pipeline-utils.git
+          git clone --branch v1.2 https://github.com/botcity-dev/cicd-pipeline-utils.git
           chmod +x cicd-pipeline-utils/scripts/bot.sh
 
       - name: Deploy Bot
@@ -31,11 +31,11 @@ jobs:
           KEY: ${{ secrets.KEY }}
         run: >
           cicd-pipeline-utils/scripts/bot.sh deploy 
-          -version "1.1.4" 
+          -version "1.0" 
           -botFile "./bot-login.zip" 
-          -botId "bot-demo-cicd" 
+          -botId "310326" 
           -type "python" 
-          -repository "live"
+          -repository "DEFAULT"
 
       - name: Release Bot
         env:
@@ -44,5 +44,5 @@ jobs:
           KEY: ${{ secrets.KEY }}
         run: >
           cicd-pipeline-utils/scripts/bot.sh release 
-          -version "1.1.3" 
-          -botId "bot-demo-cicd"
+          -version "1.0" 
+          -botId "310326"
