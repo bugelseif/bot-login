@@ -33,7 +33,7 @@ jobs:
           cicd-pipeline-utils/scripts/bot.sh deploy 
           -version "1.2.1" 
           -botFile "./bot-login.zip" 
-          -botId "310326" 
+          -botId "240326" 
           -type "python" 
           -repository "DEFAULT"
 
@@ -45,4 +45,4 @@ jobs:
         run: >
           cicd-pipeline-utils/scripts/bot.sh release 
           -version "1.2.1" 
-          -botId "310326"
+          -botId "240326"
