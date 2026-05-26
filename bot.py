@@ -43,6 +43,7 @@ def main():
         )
     # Ação de digitar no elemento, valor vindo de credenciais
     elemento_campo_usuario.send_keys(maestro.get_credential(label="cofre-login", key="user"))
+    # elemento_campo_usuario.send_keys("student")
 
     # Busca pelo elemento input de senha
     elemento_campo_senha = bot.find_element(
@@ -51,6 +52,7 @@ def main():
         )
     # Ação de digitar no elemento, valor vindo de credenciais
     elemento_campo_senha.send_keys(maestro.get_credential(label="cofre-login", key="password"))
+    # elemento_campo_senha.send_keys("Password123")
 
     # Busca pelo elemento botão submit
     elemento_botao = bot.find_element(

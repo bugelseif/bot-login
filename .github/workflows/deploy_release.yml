@@ -31,9 +31,9 @@ jobs:
           KEY: ${{ secrets.KEY }}
         run: >
           cicd-pipeline-utils/scripts/bot.sh deploy 
-          -version "1.2.1" 
+          -version "1.1" 
           -botFile "./bot-login.zip" 
-          -botId "240326" 
+          -botId "bot-login" 
           -type "python" 
           -repository "dev"
 
@@ -44,5 +44,5 @@ jobs:
           KEY: ${{ secrets.KEY }}
         run: >
           cicd-pipeline-utils/scripts/bot.sh release 
-          -version "1.2.1" 
-          -botId "240326"
+          -version "1.1" 
+          -botId "bot-login"
