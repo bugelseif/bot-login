@@ -1,6 +1,6 @@
 # Import do Web Bot
 from botcity.web import WebBot, Browser, By
-from webdriver_manager.firefox import GeckoDriverManager
+from webdriver_manager.chrome import ChromeDriverManager
 
 # Import de integração com BotCity Maestro SDK
 from botcity.maestro import BotMaestroSDK, AutomationTaskFinishStatus, AlertType
@@ -18,13 +18,16 @@ def main():
     print(f"Task ID is: {execution.task_id}")
     print(f"Task Parameters are: {execution.parameters}")
 
+    sucesso=0
+    falha=0
+
     # Instancia do Web Bot
     bot = WebBot()
 
     # Configuração do Navegador
     bot.headless = False
-    bot.browser = Browser.FIREFOX
-    bot.driver_path = GeckoDriverManager().install()
+    bot.browser = Browser.CHROME
+    bot.driver_path = ChromeDriverManager().install()
 
     maestro.alert(
         task_id=execution.task_id,
@@ -81,6 +84,10 @@ def main():
         # Ação de clicar no elemento
         elemento_deslogado.click()
 
+        status=AutomationTaskFinishStatus.SUCCESS
+        message="Tarefa foi concluída com sucesso."
+        sucesso+=1
+
 
     except Exception:
         # Busca pelo elemento de mensagem de erro
@@ -92,6 +99,10 @@ def main():
         # Imprime a mensagem de erro
         print(error_alert.text)
 
+        status=AutomationTaskFinishStatus.FAILED
+        message="Tarefa foi concluída com falha."
+        falha+=1
+
     finally:
         # Finaliza fechando o navegador
         bot.stop_browser()
@@ -100,11 +111,11 @@ def main():
         print("Finally")
         maestro.finish_task(
             task_id=execution.task_id,
-            status=AutomationTaskFinishStatus.SUCCESS,
-            message="Tarefa foi concluída com sucesso.",
+            status=status,
+            message=message,
             total_items=1, # Número total de itens processados
-            processed_items=1, # Número de itens processados com sucesso
-            failed_items=0 # Número de itens processados com falha
+            processed_items=sucesso, # Número de itens processados com sucesso
+            failed_items=falha # Número de itens processados com falha
         )
 
 
