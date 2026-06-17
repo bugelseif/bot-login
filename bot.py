@@ -32,7 +32,7 @@ def main():
     maestro.alert(
         task_id=execution.task_id,
         title="Começando processo",
-        message="This is an info alert",
+        message="Essa automação faz o login",
         alert_type=AlertType.INFO
     )
 
