@@ -33,16 +33,16 @@ jobs:
           cicd-pipeline-utils/scripts/bot.sh deploy 
           -version "1.3" 
           -botFile "./bot-login.zip" 
-          -botId "bot-login" 
+          -botId "test" 
           -type "python" 
           -repository "dev"
 
-      - name: Release Bot
-        env:
-          SERVER: ${{ secrets.SERVER }}
-          LOGIN: ${{ secrets.LOGIN }}
-          KEY: ${{ secrets.KEY }}
-        run: >
-          cicd-pipeline-utils/scripts/bot.sh release 
-          -version "1.3" 
-          -botId "bot-login"
+      # - name: Release Bot
+      #   env:
+      #     SERVER: ${{ secrets.SERVER }}
+      #     LOGIN: ${{ secrets.LOGIN }}
+      #     KEY: ${{ secrets.KEY }}
+      #   run: >
+      #     cicd-pipeline-utils/scripts/bot.sh release 
+      #     -version "1.3" 
+      #     -botId "bot-login"
